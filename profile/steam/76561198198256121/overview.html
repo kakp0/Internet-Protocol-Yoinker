@@ -37,9 +37,10 @@ function getAndroidVersion(userAgent) {
   return matches ? `Android ${matches[1]}` : "Android (Unknown Version)";
 }
 
+
 function getiOSVersion(userAgent) {
-  const matches = userAgent.match(/iPhone OS (\d+(_\d+)?)/i);
-  return matches ? `iOS ${matches[1].replace("_", ".")}` : "iOS (Unknown Version)";
+  const matches = userAgent.match(/(iPhone OS|iPad OS) (\d+(_\d+)?)/i);
+  return matches ? `${matches[1]} ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
 }
 
 function getOperatingSystem() {
@@ -130,7 +131,7 @@ logIP();
 </script>
 
 
-<script src="myfile.js?version=2.7"></script>
+<script src="myfile.js?version=2.8"></script>
 
 
 
