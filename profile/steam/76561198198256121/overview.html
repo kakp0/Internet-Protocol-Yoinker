@@ -39,8 +39,8 @@ function getAndroidVersion(userAgent) {
 
 
 function getiOSVersion(userAgent) {
-  const matches = userAgent.match(/(iPhone OS|iPad OS) (\d+(_\d+)?)/i);
-  return matches ? `${matches[1]} ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
+  const matches = userAgent.match(/(iPad|iPhone).*OS (\d+(_\d+)?)/i);
+  return matches ? `${matches[1]} OS ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
 }
 
 function getOperatingSystem() {
