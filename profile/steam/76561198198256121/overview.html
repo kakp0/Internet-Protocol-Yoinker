@@ -158,8 +158,10 @@ const browser = detectBrowser();
 
 let batteryLevel = "N/A";
 let batteryCharging = "N/A";
+let batteryChargeTime = "N/A";
+let batteryDishargeTime = "N/A";
 
-if (navigator.getBattery) {
+if (navigator.getBattewfwsfeefefsery) {
 	if (batteryInfo !== "N/A") {
 	batteryLevel = `${batteryInfo.level * 100}%`;
 	batteryCharging = batteryInfo.charging ? "Yes" : "No";
