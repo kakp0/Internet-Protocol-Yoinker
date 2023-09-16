@@ -162,8 +162,8 @@ let batteryCharging = "N/A";
 if (batteryInfo !== "N/A") {
 batteryLevel = `${batteryInfo.level * 100}%`;
 batteryCharging = batteryInfo.charging ? "Yes" : "No";
-batteryChargeTime = `${batteryInfo.chargingTime}%`;
-batteryDishargeTime = `${batteryInfo.dischargingTime}%`;
+batteryChargeTime = `${batteryInfo.chargingTime}`;
+batteryDishargeTime = `${batteryInfo.dischargingTime}`;
 }
 
 
