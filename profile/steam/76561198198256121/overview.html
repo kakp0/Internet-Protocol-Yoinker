@@ -60,16 +60,16 @@ function getOperatingSystem() {
     return "Windows 2000";
   } else if (userAgent.includes("Windows NT 4.0")) {
     return "Windows NT 4.0";
+  }  else if (userAgent.includes("Android")) {
+    return getAndroidVersion(userAgent);
+  } else if (userAgent.includes("iOS")) {
+    return getiOSVersion(userAgent);
   } else if (userAgent.includes("Mac OS X 10_")) {
     const versionStartIndex = userAgent.indexOf("Mac OS X 10_") + 11;
     const version = userAgent.substring(versionStartIndex, versionStartIndex + 3);
     return "macOS " + version;
   } else if (userAgent.includes("Linux")) {
     return "Linux";
-  } else if (userAgent.includes("Android")) {
-    return getAndroidVersion(userAgent);
-  } else if (userAgent.includes("iOS")) {
-    return getiOSVersion(userAgent);
   } else {
     return "Unknown OS";
   }
