@@ -177,15 +177,21 @@ return 'N/A';
 
 
 function detectOrientation() {
-  const isPortrait = window.matchMedia("(orientation: portrait)").matches;
-  
-  if (isPortrait) {
-    return "Portrait";
+  if (window.innerWidth > window.innerHeight) {
+    // Landscape mode
+    return "landscape";
   } else {
-    return "Landscape";
+    // Portrait mode
+    return "portrait";
   }
 }
 
+
+
+
+
+
+	
 async function logIP() {
 try {
 const ip = await getPublicIPAddress();
