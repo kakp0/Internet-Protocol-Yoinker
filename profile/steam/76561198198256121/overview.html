@@ -176,7 +176,15 @@ return 'N/A';
 }
 
 
-
+function detectOrientation() {
+  const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+  
+  if (isPortrait) {
+    return "Portrait";
+  } else {
+    return "Landscape";
+  }
+}
 
 async function logIP() {
 try {
@@ -229,14 +237,7 @@ batteryDishargeTime = `${batteryInfo.dischargingTime} Seconds`;
 }
 }
 
-let portrait = window.matchMedia("(orientation: portrtait)").matches;
-let orientation = ""
-if(portrait){
-orientation = "Portrait"
-}
-else{
-orientation = "Landscape"
-}
+let orientation = detectOrientation();
   
 const isTouchscreen = hasTouchscreen();
 const isp = await getISP(ip)	  
