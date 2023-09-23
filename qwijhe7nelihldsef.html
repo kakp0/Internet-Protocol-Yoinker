@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Response Page</title>
+</head>
+<body>
+    <script>
+        // Define a JavaScript function to handle the Fetch request
+        function handleFetchRequest(request) {
+            if (request.url.endsWith('/api/hello')) {
+                // Create a JSON response
+                const responseJson = JSON.stringify({ message: "hello" });
+
+                // Create a new Response object
+                const jsonResponse = new Response(responseJson, {
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                return jsonResponse;
+            }
+        }
+
+        // Add an event listener to intercept Fetch requests
+        self.addEventListener('fetch', event => {
+            event.respondWith(
+                // Handle the request using the custom function
+                handleFetchRequest(event.request) ||
+
+                // If the request doesn't match our custom route, pass it through
+                fetch(event.request)
+            );
+        });
+    </script>
+</body>
+</html>
