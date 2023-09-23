@@ -1,1 +1,31 @@
-{message: "hel11lo"}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Response Example</title>
+</head>
+<body>
+    <h1>JSON Response</h1>
+
+    <script>
+        // Create a JavaScript object with your response data
+        const responseData = { message: "hello" };
+
+        // Convert the JavaScript object to JSON
+        const jsonResponse = JSON.stringify(responseData);
+
+        // Set the response headers to indicate JSON content and allow CORS
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", // Allow requests from any origin
+        });
+
+        // Create a new Response object with the JSON data and headers
+        const response = new Response(jsonResponse, { headers });
+
+        // Serve the response when the page is requested
+        self.addEventListener("fetch", (event) => {
+            event.respondWith(Promise.resolve(response));
+        });
+    </script>
+</body>
+</html>
