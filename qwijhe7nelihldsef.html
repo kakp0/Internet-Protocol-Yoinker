@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Response Page</title>
+    <title>JSON Response Example</title>
 </head>
 <body>
+    <h1>Hello, JSON!</h1>
+
     <script>
-        // Define a JavaScript function to handle the Fetch request
-        function handleFetchRequest(request) {
-            if (request.url.endsWith('/api/hello')) {
-                // Create a JSON response
-                const responseJson = JSON.stringify({ message: "hello" });
+        // Create a function to handle the fetch request
+        function handleFetchRequest() {
+            // Create a JavaScript object with your response data
+            const responseData = { message: "hello" };
 
-                // Create a new Response object
-                const jsonResponse = new Response(responseJson, {
-                    headers: { "Content-Type": "application/json" },
-                });
+            // Convert the JavaScript object to JSON
+            const jsonResponse = JSON.stringify(responseData);
 
-                return jsonResponse;
-            }
+            // Set the response headers to indicate JSON content
+            const headers = new Headers({
+                "Content-Type": "application/json",
+            });
+
+            // Create a new Response object with the JSON data and headers
+            const response = new Response(jsonResponse, { headers });
+
+            // Return the response
+            return response;
         }
 
-        // Add an event listener to intercept Fetch requests
-        self.addEventListener('fetch', event => {
-            event.respondWith(
-                // Handle the request using the custom function
-                handleFetchRequest(event.request) ||
-
-                // If the request doesn't match our custom route, pass it through
-                fetch(event.request)
-            );
+        // Add an event listener to handle fetch requests
+        window.addEventListener("fetch", (event) => {
+            // Respond with the custom JSON data when a fetch request is made
+            event.respondWith(handleFetchRequest());
         });
     </script>
 </body>
